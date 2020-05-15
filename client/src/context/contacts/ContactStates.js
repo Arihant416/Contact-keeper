@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
-
+import uuid from 'uuid/dist/esm-browser/v4';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -18,47 +18,57 @@ const ContactState = (props) => {
         contacts: [
             {
                 id: 1,
-                name: 'Arihant Jain',
-                email: 'Arihant@gmail.com',
+                name: 'Jill Johnson',
+                email: 'jill@gmail.com',
                 phone: '111-111-1111',
                 type: 'personal',
             },
             {
                 id: 2,
-                name: 'Aryan',
-                email: 'Aryan@gmail.com',
-                phone: '111-211-1111',
+                name: 'Sara Watson',
+                email: 'sara@gmail.com',
+                phone: '222-222-2222',
                 type: 'personal',
             },
             {
                 id: 3,
-                name: 'Rishab Jain',
-                email: 'Rishab@gmail.com',
-                phone: '111-131-1111',
+                name: 'Harry White',
+                email: 'harry@gmail.com',
+                phone: '333-333-333',
                 type: 'professional',
             },
         ],
     };
+
     const [state, dispatch] = useReducer(contactReducer, initialState);
 
-    //Add Contact
+    // Add Contact
+    const addContact = (contact) => {
+        contact.id = uuid();
+        dispatch({ type: ADD_CONTACT, payload: contact });
+    };
 
-    //Delete Contact
+    // Delete Contact
+    const deleteContact = (id) => {
+        dispatch({ type: DELETE_CONTACT, payload: id });
+    };
 
-    //Set Current Contact
+    // Set Current Contact
 
-    //CLear Current Contact
+    // Clear Current Contact
 
-    //Update Contact
+    // Update Contact
 
-    //Filter Contacts
+    // Filter Contacts
 
-    //Clear Filter
+    // Clear Filter
 
     return (
         <ContactContext.Provider
             value={{
                 contacts: state.contacts,
+                addContact,
+                deleteContact,
             }}
         >
             {props.children}
